@@ -46,7 +46,6 @@ ________________________________________________________________________________
 // Нумерація елементів повинна починатися з 1.
 
 // const fruits = ['🍎', '🍇', '🍑', '🍌', '🍋']
-// const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 // const arrSlice = numbers.slice(0, 3)
 // console.log('arrSlice', arrSlice)
@@ -62,6 +61,21 @@ ________________________________________________________________________________
 // for (const e of numbers) {
 // 	console.log('element', e)
 // }
+
+// const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+// const newArr = []
+// const missedArr = [3, 7, 9]
+
+// for (let i = 0; i < numbers.length; i += 1) {
+// 	if (!missedArr.includes(numbers[i])) {
+// 		newArr.push(numbers[i])
+// 		if (numbers[i] % 2 === 0) continue
+// 		console.log('numbers', numbers[i])
+// 	}
+// 	console.log('Hello')
+// }
+// console.log(newArr)
 
 _______________________________________________________________________________________________________________________________________
 _______________________________________________________________________________________________________________________________________
@@ -143,3 +157,104 @@ ________________________________________________________________________________
 // }
 // console.log('min', min)
 // console.log('max', max)
+
+// ⁡⁢⁣⁣​‌‌‍‍Example 8 - Магазин​⁡
+// Відправити суму проданих товарів кожного постачальника
+// Всі товари по 20
+// Закупівля по 10
+
+// const startOrderPrice = 10
+
+// const productFromFirst = [
+// 	'тарілка',
+// 	'ложка',
+// 	'виделка',
+// 	'стільчик',
+// 	'стол',
+// 	'ніж',
+// 	'банка',
+// 	'лопатка',
+// ]
+// const codeFromFirst = [
+// 	'1234',
+// 	'2345',
+// 	'3456',
+// 	'4567',
+// 	'5678',
+// 	'6789',
+// 	'7890',
+// 	'8901',
+// ]
+
+// const productFromSecond = [
+// 	'рушник',
+// 	'халат',
+// 	'подушка',
+// 	'простирадло',
+// 	'лампа',
+// 	'ліхтарик',
+// 	'іграшка',
+// 	'лялька',
+// ]
+// const codeFromSecond = [
+// 	'12341',
+// 	'23451',
+// 	'34561',
+// 	'45671',
+// 	'56781',
+// 	'67891',
+// 	'78901',
+// 	'89011',
+// ]
+
+// const cashRegister = [
+// 	'45671',
+// 	'56781',
+// 	'67891',
+// 	'6789',
+// 	'7890',
+// 	'8901',
+// 	'78901',
+// 	'89011',
+// ]
+
+// const showcase = productFromFirst.concat(productFromSecond)
+
+// // 1 = showcase - cashRegister
+// let counterFirst = 0
+// let counterSecond = 0
+// const arr = []
+// const arr2 = []
+
+// for (let i = 0; i < showcase.length; i++) {
+// 	let index
+// 	if (productFromFirst.includes(showcase[i])) {
+// 		index = productFromFirst.indexOf(showcase[i])
+// 		const value = codeFromFirst[index]
+// 		if (cashRegister.includes(value)) {
+// 			arr.push(...showcase.slice(i, i + 1))
+// 			counterFirst++
+// 		} else arr2.push(...showcase.slice(i, i + 1))
+// 	} else if (productFromSecond.includes(showcase[i])) {
+// 		index = productFromSecond.indexOf(showcase[i])
+// 		const value = codeFromSecond[index]
+// 		if (cashRegister.includes(value)) {
+// 			arr.push(...showcase.slice(i, i + 1))
+// 			counterSecond++
+// 		} else arr2.push(...showcase.slice(i, i + 1))
+// 	}
+// }
+
+// showcase.splice(0, showcase.length, ...arr2)
+
+// // const newArr = showcase.filter((el) => {
+// // 	return !arr.includes(el)
+// // })
+// // console.log('newArr', newArr)
+
+// const totalCashForFirst = startOrderPrice * counterFirst
+// const totalCashForSecond = startOrderPrice * counterSecond
+
+// console.log('totalCashForFirst', totalCashForFirst)
+// console.log('totalCashForSecond', totalCashForSecond)
+// console.log('showcase', showcase)
