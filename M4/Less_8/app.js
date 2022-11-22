@@ -269,11 +269,31 @@ const cars = [
 // console.log(getTotalAmount(cars))
 
 // const salary = [100, 200, 300, 900, 1200]
+// const salaries = [
+// 	{ salary: 100 },
+// 	{ salary: 200 },
+// 	{ salary: 300 },
+// 	{ salary: 900 },
+// 	{ salary: 1200 },
+// ]
 
-// const total = salary.reduce((acc, el) => {
+// let total = 0
+// for (const el of salary) {
+// 	total = total + el
+// }
+// salaries.forEach((el) => {
+// 	total += el.salary //undefined + 100
+// })
+// console.log('total', total)
+// //
+// const result = salaries.reduce((total, el) => {
+// 	return (total += el.salary) // {} + 200
+// }, 0)
+// console.log('result', result)
+// const' total = salary.reduce((acc, el) => {
 // 	console.log('acc', acc)
 // 	return (acc += el)
-// }, 10)
+// }, 0)'
 
 // console.log('total', total)
 
@@ -294,3 +314,12 @@ const cars = [
 // const getSortedCarsOnSale = cars => {};
 
 // console.table(getSortedCarsOnSale(cars));
+//
+// SOME/EVERY
+// const someArr = [1, 2, 3, 4, 5, 1, 1]
+// const result = someArr.some((el) => el > 4)
+// console.log('result', result)
+
+// const someArr = [1, 2, 3, 4, 5, 2, 3]
+// const result = someArr.every((el) => el > 1)
+// console.log('result', result)
