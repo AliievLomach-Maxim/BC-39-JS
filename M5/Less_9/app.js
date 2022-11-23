@@ -181,32 +181,32 @@
 // // calcTotalPrice.call(chopShop, 'Emerald') // 5200
 // // calcTotalPrice.call(chopShop2, 'Emerald2') // 5200
 
-function calcTotalPrice(stoneName, callback) {
-	const obj = callback(stoneName)
-    console.log(obj.price * obj.quantity)
-}
+// function calcTotalPrice(stoneName, callback) {
+// 	// const obj = callback(stoneName)
+//     console.log(callback(stoneName).price * callback(stoneName).quantity)
+// }
 
-function x(stoneName) {
-	return this.stones.find((el) => el.name === stoneName)
-}
+// function x(stoneName) {
+// 	return this.stones.find((el) => el.name === stoneName)
+// }
 
-const chopShop = {
-	stones: [
-		{ name: 'Emerald', price: 1300, quantity: 4 },
-		{ name: 'Diamond', price: 2700, quantity: 3 },
-		{ name: 'Sapphire', price: 1400, quantity: 7 },
-		{ name: 'Ruby', price: 800, quantity: 2 },
-	],
-}
-const chopShop2 = {
-	stones: [
-		{ name: 'Emerald2', price: 1300, quantity: 4 },
-		{ name: 'Diamond2', price: 2700, quantity: 3 },
-		{ name: 'Sapphire2', price: 1400, quantity: 7 },
-		{ name: 'Ruby2', price: 800, quantity: 2 },
-	],
-}
-calcTotalPrice.call(chopShop, 'Emerald', x.bind(chopShop))
+// const chopShop = {
+// 	stones: [
+// 		{ name: 'Emerald', price: 1300, quantity: 4 },
+// 		{ name: 'Diamond', price: 2700, quantity: 3 },
+// 		{ name: 'Sapphire', price: 1400, quantity: 7 },
+// 		{ name: 'Ruby', price: 800, quantity: 2 },
+// 	],
+// }
+// const chopShop2 = {
+// 	stones: [
+// 		{ name: 'Emerald2', price: 1300, quantity: 4 },
+// 		{ name: 'Diamond2', price: 2700, quantity: 3 },
+// 		{ name: 'Sapphire2', price: 1400, quantity: 7 },
+// 		{ name: 'Ruby2', price: 800, quantity: 2 },
+// 	],
+// }
+// calcTotalPrice.call(chopShop, 'Emerald', x.bind(chopShop))
 
 // calcTotalPrice.call(chopShop, 'Emerald') // 5200
 // calcTotalPrice.call(chopShop2, 'Emerald2') // 5200
