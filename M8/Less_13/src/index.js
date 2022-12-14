@@ -1,4 +1,3 @@
-// import './style.css'
-import './scripts/app'
-
-console.log('Hello from Webpack')
+import './style.css'
+// import './scripts/app'
+import './scripts/local&session_storage'
