@@ -1,5 +1,7 @@
 @import './styles/style.css';
+@import './styles/styleForTimer.css';
 
 h1 {
+	text-align: center;
 	color: wheat;
 }

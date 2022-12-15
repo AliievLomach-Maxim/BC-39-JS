@@ -1,5 +1,5 @@
 // import obj from './scripts/parse'
-import { load, save } from './scripts/parse'
+// import { load, save } from './scripts/parse'
 //  jsonVar
 // const str = 'Alex!'
 // const num = 10
