@@ -5,3 +5,8 @@ h1 {
 	text-align: center;
 	color: wheat;
 }
+li {
+	display: inline-block;
+	margin-left: 10px;
+	cursor: pointer;
+}
