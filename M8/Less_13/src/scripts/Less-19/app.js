@@ -9,6 +9,7 @@
 // getUser(1).then((user) => {
 // 	console.log('user', user)
 // })
+import { createPagination } from '../Less-20/pagination'
 
 const BASE_URL = 'https://newsapi.org/v2'
 const KEY = '7391ec9459644ca0a76cb25df2a23597'
@@ -19,6 +20,8 @@ const ul = document.querySelector('.list')
 const btn = document.querySelector('.getNews')
 const selectCountry = document.querySelector('#country')
 const selectCategory = document.querySelector('#category')
+
+const pageSize = 10
 
 let _country,
 	_category = ''
@@ -41,13 +44,14 @@ const addToSelect = (elDom, arr) => {
 	elDom.insertAdjacentHTML('afterbegin', createOption(arr))
 }
 
-const fetchNews = (country, category) => {
-	const url = `${BASE_URL}/top-headlines?country=${country}&category=${category}&pageSize=10&apiKey=${KEY}`
+export const fetchNews = (page = 1) => {
+	const url = `${BASE_URL}/top-headlines?country=${_country}&category=${_category}&pageSize=${pageSize}&page=${page}&apiKey=${KEY}`
 	fetch(url)
 		.then((response) => response.json())
 		.then((news) => {
 			// console.log('news', news)
 			addToUl(news)
+			createPagination(news, pageSize)
 		})
 		.catch((error) => {
 			console.error(error)
@@ -76,5 +80,5 @@ addToSelect(selectCountry, optionCountry)
 addToSelect(selectCategory, optionCategory)
 
 btn.addEventListener('click', () => {
-	fetchNews(_country, _category)
+	fetchNews()
 })
