@@ -1,3 +1,3 @@
-const Component = (props) => <p className={props.class}>Component</p>
+const Component = (props) => <p>Component</p>
 
 export default Component

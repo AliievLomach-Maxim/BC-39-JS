@@ -1,20 +1,21 @@
+import data from './data.json'
 import CreateArrEl from './components/CreateArrEl'
-import Component from './components/Component'
+// import Component from './components/Component'
 
 const App = () => {
 	return (
-		<>
-			<div className='header'>
-				<h1>Lorem</h1>
-			</div>
-			<div className='content'>
-				<CreateArrEl />
-				<Component />
-			</div>
-			<div className='footer'>
-				<p>footer</p>
-			</div>
-		</>
+		// <CreateArrEl
+		// 	data={data}
+		// 	// name
+		// 	// isOnline
+		// 	isOffline
+		// />
+		<CreateArrEl
+			data={data}
+			// name
+			// isOnline
+			isOffline
+		></CreateArrEl>
 	)
 }
 

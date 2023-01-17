@@ -1,0 +1,11 @@
+.header {
+	width: 300px;
+}
+
+.header.red {
+	background-color: red;
+}
+
+img {
+	width: 300px;
+}
