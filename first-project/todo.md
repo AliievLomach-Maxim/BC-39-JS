@@ -37,3 +37,15 @@
 - Kahoot
 
 - Modal
+
+# Module 2 > Less 2
+
+- onChange vs control form
+- onSubmit
+- class Form
+- form reset
+- radio
+  - checked
+  - value
+- checkBox
+- Register form
