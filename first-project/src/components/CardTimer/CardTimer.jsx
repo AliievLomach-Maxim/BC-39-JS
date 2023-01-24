@@ -7,11 +7,11 @@ class CardTimer extends Component {
 		this.id = setInterval(() => {
 			this.setState({ time: new Date() })
 		}, 1000)
-		// console.log(new Date())
 		return (
 			<>
-				{this.state.time.getHours()}:{this.state.time.getMinutes()}:
-				{this.state.time.getSeconds()}
+				{this.state.time.getHours().toString().padStart(2, 0)}:
+				{this.state.time.getMinutes().toString().padStart(2, 0)}:
+				{this.state.time.getSeconds().toString().padStart(2, 0)}
 			</>
 		)
 	}
@@ -21,11 +21,11 @@ class CardTimer extends Component {
 	render() {
 		return (
 			<div
-				className='card m-3'
+				className='card mt-2 w-100 text-center'
 				style={{ width: '18rem' }}
 			>
 				<div className='card-body'>
-					<h5 className='card-title'>{this.setTime()}</h5>
+					<h3>{this.setTime()}</h3>
 				</div>
 			</div>
 		)

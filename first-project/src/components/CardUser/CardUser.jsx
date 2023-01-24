@@ -10,7 +10,7 @@ const CardUser = ({
 }) => {
 	return (
 		<div
-			className='card m-3'
+			className='card m-2'
 			style={{ width: '18rem' }}
 		>
 			<div className='card-body'>
