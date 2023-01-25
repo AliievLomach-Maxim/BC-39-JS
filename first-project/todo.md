@@ -79,3 +79,16 @@
 - pattern stateMachine with status['idle','pending','rejected','resolved']
 - refactor -> separation of components
 - refactor fetch to new file
+
+# Module 4 > Less 1
+
+- useState
+  - nothing save state
+  - one State = one useState
+  - convert class to hooks
+- useEffect
+  - lazy load
+  - custom Huks
+- useRef
+- useEffect with willUnmount
+- refactor

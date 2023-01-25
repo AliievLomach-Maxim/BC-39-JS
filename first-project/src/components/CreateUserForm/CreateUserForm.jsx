@@ -9,20 +9,6 @@ class CreateUserForm extends Component {
 		phone: '',
 	}
 
-	// componentDidMount() {
-	// 	console.log('Hello form')
-	// }
-
-	// componentDidUpdate(prevProps, prevState) {
-	// 	console.log('Update')
-	// 	console.log('prevProps :>> ', prevProps)
-	// 	console.log('prevState', prevState)
-	// }
-
-	// componentWillUnmount() {
-	// 	console.log('Unmount')
-	// }
-
 	handleChange = ({ target }) => {
 		const { name, value } = target
 		this.setState({

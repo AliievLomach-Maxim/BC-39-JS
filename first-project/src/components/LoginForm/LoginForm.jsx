@@ -1,100 +1,102 @@
-import { Component } from 'react'
+import { useState } from 'react'
 
-class LoginForm extends Component {
-	state = {
-		email: '',
-		password: '',
-		check: false,
-	}
+const LoginForm = (props) => {
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+	const [check, setCheck] = useState(false)
 
-	handleChange = ({ target }) => {
+	// const handleChange = ({ target }) => {
+	// 	const { name, value } = target
+	// 	this.setState({
+	// 		[name]: value,
+	// 	})
+	// }
+
+	const handleChange = ({ target }) => {
 		const { name, value } = target
-		this.setState({
-			[name]: value,
-		})
-	}
-	handleChangeCheck = ({ target }) => {
-		this.setState({
-			check: !this.state.check,
-		})
+		if (name === 'email') setEmail(value)
+		else setPassword(value)
 	}
 
-	handleSubmit = (e) => {
+	const handleChangeCheck = () => {
+		setCheck(!check)
+	}
+
+	const handleSubmit = (e) => {
 		e.preventDefault()
-		this.props.send({ ...this.state })
-		this.setState({
-			email: '',
-			password: '',
+		props.send({
+			email,
+			password,
 		})
+		setEmail('')
+		setPassword('')
 	}
 
-	render() {
-		return (
-			<form onSubmit={this.handleSubmit}>
-				<div className='mb-3'>
-					<label
-						htmlFor='exampleInputEmail1'
-						className='form-label'
-					>
-						Email address
-					</label>
-					<input
-						name='email'
-						type='text'
-						className='form-control'
-						id='exampleInputEmail1'
-						aria-describedby='emailHelp'
-						onChange={this.handleChange}
-						value={this.state.email}
-					/>
-					<div
-						id='emailHelp'
-						className='form-text'
-					>
-						We'll never share your email with anyone else.
-					</div>
-				</div>
-				<div className='mb-3'>
-					<label
-						htmlFor='exampleInputPassword1'
-						className='form-label'
-					>
-						Password
-					</label>
-					<input
-						name='password'
-						type='password'
-						className='form-control'
-						id='exampleInputPassword1'
-						onChange={this.handleChange}
-						value={this.state.password}
-					/>
-				</div>
-				<div className='mb-3 form-check'>
-					<input
-						onChange={this.handleChangeCheck}
-						type='checkbox'
-						className='form-check-input'
-						id='exampleCheck1'
-						checked={this.state.check}
-					/>
-					<label
-						className='form-check-label'
-						htmlFor='exampleCheck1'
-					>
-						Check me out
-					</label>
-				</div>
-				<button
-					disabled={!this.state.check}
-					type='submit'
-					className='btn btn-primary'
+	return (
+		<form onSubmit={handleSubmit}>
+			<div className='mb-3'>
+				<label
+					htmlFor='exampleInputEmail1'
+					className='form-label'
 				>
-					Submit
-				</button>
-			</form>
-		)
-	}
+					Email address
+				</label>
+				<input
+					name='email'
+					type='text'
+					className='form-control'
+					id='exampleInputEmail1'
+					aria-describedby='emailHelp'
+					onChange={handleChange}
+					value={email}
+				/>
+				<div
+					id='emailHelp'
+					className='form-text'
+				>
+					We'll never share your email with anyone else.
+				</div>
+			</div>
+			<div className='mb-3'>
+				<label
+					htmlFor='exampleInputPassword1'
+					className='form-label'
+				>
+					Password
+				</label>
+				<input
+					name='password'
+					type='password'
+					className='form-control'
+					id='exampleInputPassword1'
+					onChange={handleChange}
+					value={password}
+				/>
+			</div>
+			<div className='mb-3 form-check'>
+				<input
+					onChange={handleChangeCheck}
+					type='checkbox'
+					className='form-check-input'
+					id='exampleCheck1'
+					checked={check}
+				/>
+				<label
+					className='form-check-label'
+					htmlFor='exampleCheck1'
+				>
+					Check me out
+				</label>
+			</div>
+			<button
+				disabled={!check}
+				type='submit'
+				className='btn btn-primary'
+			>
+				Submit
+			</button>
+		</form>
+	)
 }
 
 export default LoginForm
