@@ -1,37 +1,27 @@
 import { useState, useEffect, useRef } from 'react'
 
 const CardTimer = () => {
-	const [time, setTime] = useState(() => new Date()) //!!!!
+	const [time, setTime] = useState(() => new Date())
 
-	// let id = null
 	const id = useRef(null)
 
 	useEffect(() => {
-		// const createTime = () => {
 		id.current = setInterval(() => {
 			setTime(new Date())
 		}, 1000)
-		console.log('id.current', id.current)
+
 		return () => {
-			console.log('id :>> ', id)
 			clearInterval(id.current)
 		}
 	}, [])
 
-	// useEffect(() => {
-	// 	console.log('id', id)
-	// })
-
-	// 	componentDidUpdate(prevProps, prevState) {
-	// 		clearInterval(this.id)
-	// 	}
 	return (
 		<div
 			className='card mt-2 w-100 text-center'
 			style={{ width: '18rem' }}
 		>
 			<div className='card-body'>
-				<h3>{time.getSeconds().toString()}</h3>
+				<h3>{time.toLocaleTimeString()}</h3>
 			</div>
 		</div>
 	)

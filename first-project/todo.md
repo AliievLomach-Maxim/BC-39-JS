@@ -89,6 +89,39 @@
 - useEffect
   - lazy load
   - custom Huks
-- useRef
-- useEffect with willUnmount
-- refactor
+
+# Module 4 > Less 2
+
+- useEffect first render <Modal/>
+- useEffect every render <LoginForm/>
+- useEffect clear after render <Modal/>
+
+- useEffect first render <Users/>
+- useEffect update on any change users <Users/>
+- useEffect update on change users.length with useRef <Users/>
+- optional chain <Users/>
+- refactor with toast <Users/>
+
+- edit class to huk <ContentInfo/>
+- if return <ContentInfo/>
+- batching in React 18
+
+- kahoot
+
+- useReducer <Counter/>
+- action.type
+- action.payload
+- dispatch
+
+- useMemo <TestUseMemo/>
+- complexCompute <TestUseMemo/>
+- useEffect vs useMemo <TestUseMemo/>
+
+- useCallback <TestUseMemo/>
+
+- Profiler
+
+- useContext
+- Provider
+- toggleState
+- useAlert

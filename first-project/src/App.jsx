@@ -8,8 +8,7 @@ import LoginForm from './components/LoginForm'
 import Modal from './components/Modal'
 import Search from './components/Search'
 import Users from './components/Users'
-
-// useState///
+// import TestUseMemo from './components/TestUseMemo'
 
 const App = () => {
 	const [searchText, setSearchText] = useState('')
@@ -17,15 +16,10 @@ const App = () => {
 
 	const toggleModalLogin = () => {
 		setVisibleLogin((prevState) => !prevState)
-		// setVisibleLogin(!visibleLogin)
 	}
 
 	const sendData = (data) => {
 		console.log(data)
-	}
-
-	function handleSubmit(searchText) {
-		setSearchText(searchText)
 	}
 
 	return (
@@ -36,7 +30,7 @@ const App = () => {
 			/>
 			<Header onShowModalLogin={toggleModalLogin} />
 			<CardTimer />
-			<Search onSearch={handleSubmit} />
+			<Search onSearch={setSearchText} />
 			<Counter />
 			<Users />
 			<ContentInfo value={searchText} />
@@ -49,6 +43,7 @@ const App = () => {
 					<LoginForm send={sendData} />
 				</Modal>
 			)}
+			{/* <TestUseMemo /> */}
 		</div>
 	)
 }
