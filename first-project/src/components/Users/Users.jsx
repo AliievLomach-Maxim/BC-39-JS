@@ -1,31 +1,23 @@
-import { useRef } from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { toast } from 'react-hot-toast'
+
 import CardUser from '../CardUser'
 import CreateUserForm from '../CreateUserForm'
 import Modal from '../Modal'
 
 const USERS_LOCAL_KEY = 'user-key'
-const TIMER_ALERT = 2500
-
-// function usePrevState(value) {
-// 	const ref = useRef()
-// 	useEffect(() => {
-// 		ref.current = value
-// 	})
-// 	return ref.current
-// }
+// const TIMER_ALERT = 2500
 
 const Users = () => {
 	const [visibleCreate, setVisibleCreate] = useState(false)
 	const [users, setUsers] = useState(null)
-	const [isUserCreate, setIsUserCreate] = useState(false)
-	const [isDellUser, setIsDellUser] = useState(false)
+	// const [isUserCreate, setIsUserCreate] = useState(false)
+	// const [isDellUser, setIsDellUser] = useState(false)
 
-	// const prevState = usePrevState(users)
+	const ref = useRef(users)
+	const prevUsers = ref.current
 
 	useEffect(() => {
-		// console.log('prevState', prevState)
-		console.log('First render')
 		const localData = localStorage.getItem(USERS_LOCAL_KEY)
 		if (localData) {
 			setUsers(JSON.parse(localData))
@@ -33,48 +25,27 @@ const Users = () => {
 	}, [])
 
 	useEffect(() => {
-		users && localStorage.setItem(USERS_LOCAL_KEY, JSON.stringify(users))
-		console.log('Users update')
-		setIsUserCreate(true)
-		setTimeout(() => {
-			setIsUserCreate(false)
-		}, TIMER_ALERT)
-		// if (prevState.users.length < this.state.users.length) {
-		// this.setState({ isUserCreate: true })
-		// setTimeout(() => {
-		// 	this.setState({ isUserCreate: false })
-		// }, TIMER_ALERT)
-		// } else if (prevState.users.length > this.state.users.length) {
-		// 	this.setState({ isDellUser: true })
-		// 	setTimeout(() => {
-		// 		this.setState({ isDellUser: false })
-		// 	}, TIMER_ALERT)
-		// }
-	}, [users])
+		ref.current = users
 
-	// componentDidUpdate(_, prevState) {
-	// 	if (prevState.users && prevState.users.length < this.state.users.length) {
-	// 		this.setState({ isUserCreate: true })
-	// 		setTimeout(() => {
-	// 			this.setState({ isUserCreate: false })
-	// 		}, TIMER_ALERT)
-	// 	} else if (
-	// 		prevState.users &&
-	// 		prevState.users.length > this.state.users.length
-	// 	) {
-	// 		this.setState({ isDellUser: true })
-	// 		setTimeout(() => {
-	// 			this.setState({ isDellUser: false })
-	// 		}, TIMER_ALERT)
-	// 	}
-	// 	if (prevState.users && prevState.users.length !== this.state.users.length) {
-	// 		localStorage.setItem(USERS_LOCAL_KEY, JSON.stringify(this.state.users))
-	// 	}
-	// }
+		if (prevUsers?.length < users?.length) {
+			toast.success('Create new user successfully')
+			// setIsUserCreate(true)
+			// setTimeout(() => {
+			// 	setIsUserCreate(false)
+			// }, TIMER_ALERT)
+		} else if (prevUsers?.length > users?.length) {
+			toast.success('Dell user successfully')
+			// setIsDellUser(true)
+			// setTimeout(() => {
+			// 	setIsDellUser(false)
+			// }, TIMER_ALERT)
+		}
+
+		users && localStorage.setItem(USERS_LOCAL_KEY, JSON.stringify(users))
+	}, [users, prevUsers?.length])
 
 	const toggleModalCreate = () => {
-		// this.setState((prevState) => ({ visibleCreate: !prevState.visibleCreate }))
-		setVisibleCreate(!visibleCreate)
+		setVisibleCreate((prev) => !prev)
 	}
 
 	const createUser = (user) => {
@@ -89,9 +60,6 @@ const Users = () => {
 	}
 
 	const dellUser = (id) => {
-		// this.setState((prev) => ({
-		// 	users: prev.users.filter((user) => user.id !== id),
-		// }))
 		setUsers((prev) => {
 			return prev.filter((user) => user.id !== id)
 		})
@@ -109,7 +77,7 @@ const Users = () => {
 							Create User
 						</button>
 
-						{isUserCreate && (
+						{/* {isUserCreate && (
 							<div
 								className='alert alert-success  '
 								role='alert'
@@ -124,7 +92,7 @@ const Users = () => {
 							>
 								Dell User !
 							</div>
-						)}
+						)} */}
 						{users.length === 0 && (
 							<div
 								className='alert alert-warning  '
@@ -179,25 +147,25 @@ export default Users
 // 		} else this.setState({ users: [] })
 // 	}
 
-// 	componentDidUpdate(_, prevState) {
-// 		if (prevState.users && prevState.users.length < this.state.users.length) {
-// 			this.setState({ isUserCreate: true })
-// 			setTimeout(() => {
-// 				this.setState({ isUserCreate: false })
-// 			}, TIMER_ALERT)
-// 		} else if (
-// 			prevState.users &&
-// 			prevState.users.length > this.state.users.length
-// 		) {
-// 			this.setState({ isDellUser: true })
-// 			setTimeout(() => {
-// 				this.setState({ isDellUser: false })
-// 			}, TIMER_ALERT)
-// 		}
-// 		if (prevState.users && prevState.users.length !== this.state.users.length) {
-// 			localStorage.setItem(USERS_LOCAL_KEY, JSON.stringify(this.state.users))
-// 		}
+// componentDidUpdate(_, prevState) {
+// 	if (prevState.users && prevState.users.length < this.state.users.length) {
+// 		this.setState({ isUserCreate: true })
+// 		setTimeout(() => {
+// 			this.setState({ isUserCreate: false })
+// 		}, TIMER_ALERT)
+// 	} else if (
+// 		prevState.users &&
+// 		prevState.users.length > this.state.users.length
+// 	) {
+// 		this.setState({ isDellUser: true })
+// 		setTimeout(() => {
+// 			this.setState({ isDellUser: false })
+// 		}, TIMER_ALERT)
 // 	}
+// if (prevState.users && prevState.users.length !== this.state.users.length) {
+// 	localStorage.setItem(USERS_LOCAL_KEY, JSON.stringify(this.state.users))
+// }
+// }
 
 // 	toggleModalCreate = () => {
 // 		this.setState((prevState) => ({ visibleCreate: !prevState.visibleCreate }))
