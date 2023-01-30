@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const CardUser = ({
 	firstName,
@@ -20,11 +21,21 @@ const CardUser = ({
 				<p className='card-text'>Address: {address}</p>
 				<p className='card-text'>Phone: {phone}</p>
 				<button
+					disabled={!handleDell}
 					className='btn btn-danger'
 					onClick={() => handleDell(id)}
 				>
 					Dell User
 				</button>
+
+				{handleDell && (
+					<Link
+						className='btn btn-success mx-3'
+						to={`user/${id}`}
+					>
+						Details
+					</Link>
+				)}
 			</div>
 		</div>
 	)

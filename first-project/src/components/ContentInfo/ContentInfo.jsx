@@ -2,14 +2,22 @@ import { useEffect, useState } from 'react'
 import CardNews from '../CardNews/CardNews'
 import ErrorCard from '../ErrorCard'
 import Loader from '../Loader'
-import { getNews } from '../services/getNews'
+import { getNews } from '../../services/getNews'
 
 import React from 'react'
+import { useAlertContext } from '../../forRoutes/Context/AlertContext'
 
 const ContentInfo = ({ value }) => {
-	const [news, setNews] = useState(null)
+	const { news, setNews } = useAlertContext()
+	// const [news, setNews] = useState(null)
+	console.log('news :>> ', news)
 	const [error, setError] = useState('')
 	const [status, setStatus] = useState('idle')
+
+	useEffect(() => {
+		if (!news) return
+		setStatus('resolved')
+	}, [news])
 
 	useEffect(() => {
 		if (!value) return
@@ -28,7 +36,7 @@ const ContentInfo = ({ value }) => {
 				setError(error)
 				setStatus('rejected')
 			})
-	}, [value])
+	}, [setNews, value])
 
 	if (status === 'rejected') {
 		return (
