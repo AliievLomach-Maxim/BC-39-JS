@@ -5,7 +5,7 @@ import Loader from '../Loader'
 import { getNews } from '../../services/getNews'
 
 import React from 'react'
-import { useAlertContext } from '../../forRoutes/Context/AlertContext'
+import { useAlertContext } from '../../Context/AlertContext'
 
 const ContentInfo = ({ value }) => {
 	const { news, setNews } = useAlertContext()

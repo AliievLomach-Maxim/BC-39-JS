@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const CardUser = ({
 	firstName,
@@ -9,6 +9,9 @@ const CardUser = ({
 	handleDell,
 	id,
 }) => {
+	const location = useLocation()
+
+	console.log('location :>> ', location)
 	return (
 		<div
 			className='card m-2'
@@ -31,7 +34,8 @@ const CardUser = ({
 				{handleDell && (
 					<Link
 						className='btn btn-success mx-3'
-						to={`user/${id}`}
+						to={`${id}`}
+						state={location}
 					>
 						Details
 					</Link>

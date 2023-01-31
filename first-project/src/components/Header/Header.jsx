@@ -1,7 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAlertContext } from '../../Context/AlertContext'
 
-const Header = ({ onShowModalLogin }) => {
+const Header = () => {
+	const { isAuth, logout } = useAlertContext()
+	const navigate = useNavigate()
 	return (
 		<nav className='navbar bg-dark navbar-expand-lg'>
 			<div className='container-fluid'>
@@ -32,12 +35,14 @@ const Header = ({ onShowModalLogin }) => {
 						</Link>
 					</div>
 				</div>
-				<button
+				<div
 					className='btn btn-outline-success'
-					onClick={onShowModalLogin}
+					onClick={() => {
+						isAuth ? logout() : navigate('/login')
+					}}
 				>
-					Login
-				</button>
+					{isAuth ? 'Logout' : 'Login'}
+				</div>
 			</div>
 		</nav>
 	)
