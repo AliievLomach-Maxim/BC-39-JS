@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const LoginForm = (props) => {
+const LoginForm = ({ login }) => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [check, setCheck] = useState(false)
@@ -24,7 +24,7 @@ const LoginForm = (props) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		props.send({
+		login({
 			email,
 			password,
 		})

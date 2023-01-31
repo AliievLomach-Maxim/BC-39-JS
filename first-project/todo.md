@@ -138,3 +138,13 @@
 - global save search result <Context/>
 - PageDetails for news & users
 - useParams
+
+# Module 5 > Less 2
+
+- useSearchParams <Users/>
+- objectFromEntries
+- BackBtn with useLocation <UserDetails/>
+- location.state
+- lazy & suspense
+- loginPage
+- PrivateRoute

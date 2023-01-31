@@ -1,98 +1,80 @@
-import { useState } from 'react'
+import { lazy } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import { useAlertContext } from './Context/AlertContext'
+import NewsDetails from './components/ContentInfo/NewsDetails'
+import UserDetails from './components/Users/UserDetails'
+import Layout from './Layout/Layout'
+import ErrorPage from './pages/ErrorPage'
+import HomePage from './pages/HomePage'
+
 import { Toaster } from 'react-hot-toast'
-import ContentInfo from './components/ContentInfo'
-import CardTimer from './components/CardTimer'
-import Counter from './components/Counter'
-import Header from './components/Header'
-import LoginForm from './components/LoginForm'
-import Modal from './components/Modal'
-import Search from './components/Search'
-import Users from './components/Users'
-// import TestUseMemo from './components/TestUseMemo'
+import LoginPage from './pages/LoginPage'
+import PrivateRoute from './components/PrivateRoute/PrivateRoute'
+
+const NewsPage = lazy(() => import('./pages/NewsPage'))
+const UsersPage = lazy(() => import('./pages/UsersPage'))
 
 const App = () => {
-	const [searchText, setSearchText] = useState('')
-	const [visibleLogin, setVisibleLogin] = useState(false)
-
-	const toggleModalLogin = () => {
-		setVisibleLogin((prevState) => !prevState)
-	}
-
-	const sendData = (data) => {
-		console.log(data)
-	}
-
+	const { isAuth } = useAlertContext()
 	return (
-		<div className='container'>
+		<>
 			<Toaster
 				position='top-right'
 				toastOptions={{ duration: 1500 }}
 			/>
-			<Header onShowModalLogin={toggleModalLogin} />
-			<CardTimer />
-			<Search onSearch={setSearchText} />
-			<Counter />
-			<Users />
-			<ContentInfo value={searchText} />
-
-			{visibleLogin && (
-				<Modal
-					onClose={toggleModalLogin}
-					type='Login'
+			<Routes>
+				<Route
+					path='/login'
+					element={<LoginPage />}
+				/>
+				<Route
+					path='/'
+					element={<Layout />}
 				>
-					<LoginForm send={sendData} />
-				</Modal>
-			)}
-			{/* <TestUseMemo /> */}
-		</div>
+					<Route
+						index
+						element={<HomePage />}
+					/>
+					<Route
+						path='news'
+						element={
+							<PrivateRoute>
+								<NewsPage />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path='news/:author'
+						element={
+							<PrivateRoute>
+								<NewsDetails />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path='users'
+						element={
+							<PrivateRoute>
+								<UsersPage />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path='users/:id'
+						element={
+							<PrivateRoute>
+								<UserDetails />
+							</PrivateRoute>
+						}
+					/>
+				</Route>
+				<Route
+					path='*'
+					element={<ErrorPage />}
+				/>
+			</Routes>
+		</>
 	)
 }
 
 export default App
-
-// class App extends Component {
-// state = {
-// 	visibleLogin: false,
-// 	searchText: '',
-// }
-
-// 	toggleModalLogin = () => {
-// 		this.setState((prevState) => ({ visibleLogin: !prevState.visibleLogin }))
-// 	}
-
-// 	sendData = (data) => {
-// 		console.log(data)
-// 	}
-
-// 	handleSubmit = (searchText) => {
-// 		this.setState({ searchText })
-// 	}
-
-// 	render() {
-// 		return (
-// 			<div className='container'>
-// 				<Toaster
-// 					position='top-right'
-// 					toastOptions={{ duration: 1500 }}
-// 				/>
-// 				<Header onShowModalLogin={this.toggleModalLogin} />
-// 				<CardTimer />
-// 				<Search onSearch={this.handleSubmit} />
-// 				<Counter />
-// 				<Users />
-// 				<ContentInfo value={this.state.searchText} />
-
-// 				{this.state.visibleLogin && (
-// 					<Modal
-// 						onClose={this.toggleModalLogin}
-// 						type='Login'
-// 					>
-// 						<LoginForm send={this.sendData} />
-// 					</Modal>
-// 				)}
-// 			</div>
-// 		)
-// 	}
-// }
-
-// export default App

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import CardUser from '../CardUser'
 
 const USERS_LOCAL_KEY = 'user-key'
@@ -7,6 +7,8 @@ const USERS_LOCAL_KEY = 'user-key'
 const UserDetails = () => {
 	const [users, setUsers] = useState(null)
 	const [userDetails, setUserDetails] = useState(null)
+
+	const location = useLocation()
 
 	const params = useParams()
 	const { id } = params
@@ -23,15 +25,23 @@ const UserDetails = () => {
 	}, [id, users])
 
 	return (
-		userDetails?.length > 0 && (
-			<CardUser
-				id={id}
-				firstName={userDetails[0].firstName}
-				secondName={userDetails[0].secondName}
-				address={userDetails[0].address}
-				phone={userDetails[0].phone}
-			/>
-		)
+		<>
+			<Link
+				to={location.state ?? '/users'}
+				className='btn btn-secondary mt-2'
+			>
+				Back
+			</Link>
+			{userDetails?.length > 0 && (
+				<CardUser
+					id={id}
+					firstName={userDetails[0].firstName}
+					secondName={userDetails[0].secondName}
+					address={userDetails[0].address}
+					phone={userDetails[0].phone}
+				/>
+			)}
+		</>
 	)
 }
 
