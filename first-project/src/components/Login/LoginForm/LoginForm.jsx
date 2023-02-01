@@ -1,16 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
-const LoginForm = ({ login }) => {
+import { useCustomContext } from '../../../Context/CustomContext'
+
+const LoginForm = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [check, setCheck] = useState(false)
 
-	// const handleChange = ({ target }) => {
-	// 	const { name, value } = target
-	// 	this.setState({
-	// 		[name]: value,
-	// 	})
-	// }
+	const { login } = useCustomContext()
 
 	const handleChange = ({ target }) => {
 		const { name, value } = target

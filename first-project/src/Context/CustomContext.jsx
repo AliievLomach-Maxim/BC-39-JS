@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 const Context = React.createContext()
 
-export const useAlertContext = () => {
+export const useCustomContext = () => {
 	return useContext(Context)
 }
 
@@ -13,7 +13,7 @@ const AUTH = {
 }
 const IsAUTH = 'IsAUTH'
 
-const AlertContext = ({ children }) => {
+const CustomContext = ({ children }) => {
 	const [toggle, setToggle] = useState(false)
 	const [news, setNews] = useState(null)
 	const [isAuth, setIsAuth] = useState(false)
@@ -61,4 +61,4 @@ const AlertContext = ({ children }) => {
 	)
 }
 
-export default AlertContext
+export default CustomContext

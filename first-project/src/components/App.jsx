@@ -1,21 +1,20 @@
 import { lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { useAlertContext } from './Context/AlertContext'
-import NewsDetails from './components/ContentInfo/NewsDetails'
-import UserDetails from './components/Users/UserDetails'
-import Layout from './Layout/Layout'
-import ErrorPage from './pages/ErrorPage'
-import HomePage from './pages/HomePage'
-
 import { Toaster } from 'react-hot-toast'
-import LoginPage from './pages/LoginPage'
-import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 
-const NewsPage = lazy(() => import('./pages/NewsPage'))
-const UsersPage = lazy(() => import('./pages/UsersPage'))
+import LoginPage from '../pages/LoginPage'
+import HomePage from '../pages/HomePage'
+import ErrorPage from '../pages/ErrorPage'
+import Layout from '../Layout/Layout'
+import PrivateRoute from './PrivateRoute/PrivateRoute'
+import NewsDetails from './News/ContentInfo/NewsDetails'
+
+import UserDetails from './Users/UserDetails'
+
+const NewsPage = lazy(() => import('../pages/NewsPage'))
+const UsersPage = lazy(() => import('../pages/UsersPage'))
 
 const App = () => {
-	const { isAuth } = useAlertContext()
 	return (
 		<>
 			<Toaster

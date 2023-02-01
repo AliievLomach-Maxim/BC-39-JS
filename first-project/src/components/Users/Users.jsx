@@ -2,9 +2,9 @@ import { useState, useEffect, useRef } from 'react'
 import { toast } from 'react-hot-toast'
 import { useSearchParams } from 'react-router-dom'
 
-import CardUser from '../CardUser'
-import CreateUserForm from '../CreateUserForm'
-import Modal from '../Modal'
+import CardUser from './CardUser'
+import CreateUserForm from './CreateUserForm'
+import Modal from '../UI Component/Modal'
 import FilterUsers from './FilterUsers'
 
 const USERS_LOCAL_KEY = 'user-key'
@@ -18,9 +18,6 @@ const Users = () => {
 
 	const ref = useRef(users)
 	const prevUsers = ref.current
-	// const arr = Object.fromEntries([...searchParams])
-	// console.log('arr', arr)
-	// setSearchParams({ ...arr, filter: 'new' })
 
 	const filterParams = searchParams.get('filter') ?? ''
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
-import CardUser from '../CardUser'
+import CardUser from './CardUser/CardUser'
 
 const USERS_LOCAL_KEY = 'user-key'
 
