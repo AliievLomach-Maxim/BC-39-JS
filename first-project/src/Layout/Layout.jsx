@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react'
-import { Toaster } from 'react-hot-toast'
 import { Outlet } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
+
 import Header from '../components/Header/Header'
 
 const Layout = () => {

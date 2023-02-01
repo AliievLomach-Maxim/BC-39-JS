@@ -1,7 +1,7 @@
 import React from 'react'
 
-import CardTimer from '../components/CardTimer'
-import Counter from '../components/Counter'
+import CardTimer from '../components/Home/CardTimer/CardTimer'
+import Counter from '../components/Home/Counter/Counter'
 
 const HomePage = () => {
 	return (

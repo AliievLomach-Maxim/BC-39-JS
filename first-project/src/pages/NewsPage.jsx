@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import ContentInfo from '../components/ContentInfo'
-import Search from '../components/Search'
+
+import Search from '../components/News/Search/Search'
+import ContentInfo from '../components/News/ContentInfo/ContentInfo'
 
 const NewsPage = () => {
 	const [searchText, setSearchText] = useState('')

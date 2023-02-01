@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAlertContext } from '../../Context/AlertContext'
+import { useCustomContext } from '../../Context/CustomContext'
 
 const Header = () => {
-	const { isAuth, logout } = useAlertContext()
+	const { isAuth, logout } = useCustomContext()
 	const navigate = useNavigate()
 	return (
 		<nav className='navbar bg-dark navbar-expand-lg'>
