@@ -1,22 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
+
 import { useDispatch, useSelector } from 'react-redux'
 
-// import json from '../../../posts.json'
 import CreatePost from './CreatePost'
 
 import { createPostAction } from '../../../store/posts/actionsPosts'
 
 const Posts = () => {
-	// const [posts, setPosts] = useState(json)
-
 	const dispatch = useDispatch()
-
-	// const {posts} = useSelector((state) => state.posts)
-	const posts = useSelector((state) => state.posts.posts)
+	const posts = useSelector((state) => state.posts)
 
 	const createNewPost = (newPost) => {
 		dispatch(createPostAction(newPost))
-		// setPosts((prev) => [...prev, { title, body, id: posts.length + 1 }])
 	}
 
 	return (
