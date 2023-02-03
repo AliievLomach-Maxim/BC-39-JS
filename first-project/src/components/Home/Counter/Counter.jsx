@@ -2,7 +2,8 @@ import React from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { plusAction, minusAction } from '../../../store/counter/actionsCounter'
+// import { plusAction, minusAction } from '../../../store/counter/actionsCounter'
+import { plusAction, minusAction } from '../../../store/counterWithSlice/slice'
 
 const Counter = () => {
 	const total = useSelector((state) => state.counter.total)

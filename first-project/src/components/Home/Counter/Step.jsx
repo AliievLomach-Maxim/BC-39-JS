@@ -2,7 +2,8 @@ import React from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { stepAction } from '../../../store/counter/actionsCounter'
+// import { stepAction } from '../../../store/counter/actionsCounter'
+import { stepAction } from '../../../store/counterWithSlice/slice'
 
 const Step = () => {
 	const dispatch = useDispatch()

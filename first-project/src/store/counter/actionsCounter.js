@@ -1,7 +1,7 @@
-import { PLUS, MINUS, STEP } from './typesCounter'
+import { createAction } from '@reduxjs/toolkit'
 
-export const plusAction = () => ({ type: PLUS })
+export const plusAction = createAction('COUNTER/PLUS')
 
-export const minusAction = () => ({ type: MINUS })
+export const minusAction = createAction('COUNTER/MINUS')
 
-export const stepAction = (value) => ({ type: STEP, payload: value })
+export const stepAction = createAction('COUNTER/STEP')

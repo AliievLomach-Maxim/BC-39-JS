@@ -1,22 +1,11 @@
 import { initialStateCounter } from './initialStateCounter'
 
-import { PLUS, STEP, MINUS } from './typesCounter'
+import { createReducer } from '@reduxjs/toolkit'
 
-export const counterReducer = (
-	state = initialStateCounter,
-	{ type, payload }
-) => {
-	switch (type) {
-		case PLUS:
-			return { ...state, total: state.total + state.step }
+import { minusAction, plusAction, stepAction } from './actionsCounter'
 
-		case MINUS:
-			return { ...state, total: state.total - state.step }
-
-		case STEP:
-			return { ...state, step: payload }
-
-		default:
-			return state
-	}
-}
+export const counterReducer = createReducer(initialStateCounter, {
+	[plusAction]: (state) => ({ ...state, total: state.total + state.step }),
+	[minusAction]: (state) => ({ ...state, total: state.total - state.step }),
+	[stepAction]: (state, action) => ({ ...state, step: action.payload }),
+})
