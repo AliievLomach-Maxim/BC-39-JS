@@ -1,16 +1,18 @@
-import { NEW_POST } from './typesPosts'
-
 import { initialStatePosts } from './initialStatePosts'
+import { createReducer } from '@reduxjs/toolkit'
+import {
+	createPostAction,
+	deletePost,
+	toggleFavoritePost,
+} from './actionsPosts'
 
-export const postsReducer = (
-	state = initialStatePosts.posts,
-	{ type, payload }
-) => {
-	switch (type) {
-		case NEW_POST:
-			return [...state.posts, { ...payload, id: state.posts.length + 1 }]
-
-		default:
-			return state
-	}
-}
+export const postsReducer = createReducer(initialStatePosts.posts, {
+	[createPostAction]: (state, action) => [action.payload, ...state],
+	[deletePost]: (state, action) =>
+		state.filter((post) => post.id !== action.payload),
+	[toggleFavoritePost]: (state, action) => {
+		return state.map((post) =>
+			post.id === action.payload ? { ...post, favorite: !post.favorite } : post
+		)
+	},
+})

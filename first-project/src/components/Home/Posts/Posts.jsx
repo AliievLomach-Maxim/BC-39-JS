@@ -4,16 +4,25 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import CreatePost from './CreatePost'
 
-import { createPostAction } from '../../../store/posts/actionsPosts'
+import {
+	createPostAction,
+	deletePost,
+	toggleFavoritePost,
+} from '../../../store/postsWithSlice/slice'
 
 const Posts = () => {
 	const dispatch = useDispatch()
-	const posts = useSelector((state) => state.posts)
+	const posts = useSelector((state) => state.posts.posts)
 
 	const createNewPost = (newPost) => {
 		dispatch(createPostAction(newPost))
 	}
-
+	const handleDelete = (id) => {
+		dispatch(deletePost(id))
+	}
+	const handleFavorite = (id) => {
+		dispatch(toggleFavoritePost(id))
+	}
 	return (
 		<>
 			<CreatePost create={createNewPost} />
@@ -26,6 +35,18 @@ const Posts = () => {
 						<div className='ms-2 me-auto'>
 							<div className='fw-bold'>{post.title}</div>
 							{post.body}
+						</div>
+						<div
+							className='btn btn-danger'
+							onClick={() => handleDelete(post.id)}
+						>
+							Dell
+						</div>
+						<div
+							className={`ms-2 btn btn-${post.favorite ? 'success' : 'danger'}`}
+							onClick={() => handleFavorite(post.id)}
+						>
+							Favorite
 						</div>
 					</li>
 				))}

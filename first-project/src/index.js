@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
+import { PersistGate } from 'redux-persist/integration/react'
 
 import './index.css'
-import { store } from './store/store'
+import { persistor, store } from './store/store'
 
 import CustomContext from './Context/CustomContext'
 
@@ -14,9 +15,14 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
 		<BrowserRouter>
 			<Provider store={store}>
-				<CustomContext>
-					<App />
-				</CustomContext>
+				<PersistGate
+					loading={null}
+					persistor={persistor}
+				>
+					<CustomContext>
+						<App />
+					</CustomContext>
+				</PersistGate>
 			</Provider>
 		</BrowserRouter>
 	</React.StrictMode>

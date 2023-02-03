@@ -184,9 +184,10 @@
 - createAction
 - createReducer
   - action.toString()
+- configureStore
 - combineReducer not use at the top level
-
 - selectors
+
 - redux persist
   - combineReducer
   - serializableCheck
