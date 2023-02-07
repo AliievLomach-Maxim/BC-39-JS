@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 
 import {
 	persistStore,
@@ -11,6 +11,7 @@ import {
 	REGISTER,
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import { newsApi } from './news/usersApi'
 
 import { rootReducer } from './reducer'
 
@@ -43,7 +44,9 @@ export const store = configureStore({
 			serializableCheck: {
 				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
 			},
-		}),
+		}).concat(newsApi.middleware),
+	// middleware: (getDefaultMiddleware) =>
+	// 	getDefaultMiddleware().concat(newsApi.middleware),
 })
 
 export const persistor = persistStore(store)

@@ -17,6 +17,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 // export const getNewsThunk = createAsyncThunk('news/getNews',async () =>await getTopNews())
 export const getNewsThunk = createAsyncThunk('news/getNews', () => getTopNews())
 
+// export const dellNewsThunk = createAsyncThunk('news/getNews', () => {})
+// export const createNewsThunk = createAsyncThunk('news/getNews', () => {})
+
 // export const getSearchNewsThunk = (value) => {
 // 	return async (dispatch) => {
 // 		try {

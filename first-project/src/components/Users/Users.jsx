@@ -1,108 +1,77 @@
-import { useState, useEffect, useRef } from 'react'
-import { toast } from 'react-hot-toast'
-import { useSearchParams } from 'react-router-dom'
+import { useMemo, useState } from 'react'
 
 import CardUser from './CardUser'
 import CreateUserForm from './CreateUserForm'
 import Modal from '../UI Component/Modal'
 import FilterUsers from './FilterUsers'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
+import { createUser, deleteUser } from '../../store/users/slices/usersSlice'
+import {
+	selectorUsersFilter,
+	selectorUsersList,
+	usersFilteredListSelector,
+} from '../../store/selectors/selectors'
 
-const USERS_LOCAL_KEY = 'user-key'
+// const selector = (state) => {
+// 	const { counter, news } = state
+// 	return { counter, news }
+// }
 
 const Users = () => {
+	const dispatch = useDispatch()
 	const [visibleCreate, setVisibleCreate] = useState(false)
-	const [users, setUsers] = useState(null)
-	const [filteredUsers, setFilteredUsers] = useState([])
+	const [counter, setCounter] = useState(0)
 
-	const [searchParams, setSearchParams] = useSearchParams()
+	const filteredUsers = useSelector(usersFilteredListSelector)
 
-	const ref = useRef(users)
-	const prevUsers = ref.current
-
-	const filterParams = searchParams.get('filter') ?? ''
-
-	useEffect(() => {
-		const localData = localStorage.getItem(USERS_LOCAL_KEY)
-		if (localData) {
-			setUsers(JSON.parse(localData))
-		} else setUsers([])
-	}, [])
-
-	useEffect(() => {
-		ref.current = users
-
-		setFilteredUsers(
-			users?.filter((user) =>
-				user.firstName.toLowerCase().includes(filterParams.toLowerCase())
-			)
-		)
-
-		if (prevUsers?.length < users?.length) {
-			toast.success('Create new user successfully')
-		} else if (prevUsers?.length > users?.length) {
-			toast.success('Dell user successfully')
-		}
-
-		users && localStorage.setItem(USERS_LOCAL_KEY, JSON.stringify(users))
-	}, [users, prevUsers?.length, filterParams])
+	// const filteredUsers = () =>
+	// 	usersList.filter((user) => {
+	// 		console.log('filter')
+	// 		return user.firstName.toLowerCase().includes(filterText.toLowerCase())
+	// 	})
 
 	const toggleModalCreate = () => {
 		setVisibleCreate((prev) => !prev)
 	}
 
-	const createUser = (user) => {
-		const newUser = {
-			...user,
-			id: Date.now(),
-			lang: 'Ukr',
-		}
-		setUsers((prev) => {
-			return [...prev, newUser]
-		})
-	}
-
 	const dellUser = (id) => {
-		setUsers((prev) => {
-			return prev.filter((user) => user.id !== id)
-		})
+		dispatch(deleteUser(id))
 	}
 
 	return (
 		<>
-			<FilterUsers
-				setSearchParams={setSearchParams}
-				filterParams={filterParams}
-			/>
-			{filteredUsers && (
-				<div className='container-fluid'>
-					<div className='row'>
-						<button
-							className='btn btn-outline-success my-2 '
-							onClick={toggleModalCreate}
-						>
-							Create User
-						</button>
+			<button onClick={() => setCounter((prev) => prev + 1)}>{counter}</button>
+			<FilterUsers />
+			<div className='container-fluid'>
+				<div className='row'>
+					<button
+						className='btn btn-outline-success my-2 '
+						onClick={toggleModalCreate}
+					>
+						Create User
+					</button>
 
-						{filteredUsers.length === 0 && (
-							<div
-								className='alert alert-warning  '
-								role='alert'
-							>
-								User not found!
-							</div>
-						)}
-						{visibleCreate && (
-							<Modal
+					{filteredUsers.length === 0 && (
+						<div
+							className='alert alert-warning  '
+							role='alert'
+						>
+							User not found!
+						</div>
+					)}
+					{visibleCreate && (
+						<Modal
+							onClose={toggleModalCreate}
+							type='Create'
+						>
+							<CreateUserForm
+								create={(value) => dispatch(createUser(value))}
 								onClose={toggleModalCreate}
-								type='Create'
-							>
-								<CreateUserForm
-									create={createUser}
-									onClose={toggleModalCreate}
-								/>
-							</Modal>
-						)}
-						{filteredUsers.map(
+							/>
+						</Modal>
+					)}
+					{filteredUsers.length > 0 &&
+						filteredUsers.map(
 							({ firstName, secondName, address, phone, id }) => (
 								<CardUser
 									key={id}
@@ -115,9 +84,8 @@ const Users = () => {
 								/>
 							)
 						)}
-					</div>
 				</div>
-			)}
+			</div>
 		</>
 	)
 }
