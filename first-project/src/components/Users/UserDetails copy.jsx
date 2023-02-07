@@ -1,17 +1,28 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
-
 import CardUser from './CardUser/CardUser'
 
+const USERS_LOCAL_KEY = 'user-key'
+
 const UserDetails = () => {
-	const { usersList } = useSelector((state) => state.users)
+	const [users, setUsers] = useState(null)
+	const [userDetails, setUserDetails] = useState(null)
 
 	const location = useLocation()
+
 	const params = useParams()
 	const { id } = params
 
-	const userDetails = usersList.filter((user) => user.id === id)
+	useEffect(() => {
+		const localData = localStorage.getItem(USERS_LOCAL_KEY)
+		if (localData) {
+			setUsers(JSON.parse(localData))
+		} else setUsers([])
+	}, [])
+
+	useEffect(() => {
+		users && setUserDetails(users.filter((user) => user.id === Number(id)))
+	}, [id, users])
 
 	return (
 		<>

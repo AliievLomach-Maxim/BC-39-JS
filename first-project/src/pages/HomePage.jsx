@@ -1,9 +1,11 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 
 import CardTimer from '../components/Home/CardTimer/CardTimer'
 import Counter from '../components/Home/Counter/Counter'
 import Step from '../components/Home/Counter/Step'
 import Posts from '../components/Home/Posts/Posts'
+import Users from '../components/Users/Users'
 
 const HomePage = () => {
 	return (
@@ -12,6 +14,8 @@ const HomePage = () => {
 			<Step />
 			<Counter />
 			<Posts />
+			<Users />
+			<Outlet />
 		</>
 	)
 }
