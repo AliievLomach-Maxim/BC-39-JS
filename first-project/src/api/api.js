@@ -5,7 +5,6 @@ export const axiosInstance = axios.create({
 })
 
 export const setTokenAuth = (value) => {
-	console.log(value)
 	axiosInstance.defaults.headers.common['Authorization'] = value
 }
 

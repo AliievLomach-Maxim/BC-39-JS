@@ -17,7 +17,6 @@ const handleAuthFulfilled = (state, { payload }) => {
 }
 
 const handleError = (state, action) => {
-	console.log(action)
 	state.isLoading = false
 	state.error = action.error.message
 }

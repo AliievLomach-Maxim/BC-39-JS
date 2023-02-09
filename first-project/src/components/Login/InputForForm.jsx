@@ -10,14 +10,14 @@ const InputForForm = ({
 }) => {
 	return (
 		<div className='mb-3'>
-			<label htmlFor={`exampleInput${type}`} className='form-label'>
+			<label htmlFor={`exampleInput${name}`} className='form-label'>
 				{label}
 			</label>
 			<input
 				name={name}
 				type={type}
 				className='form-control'
-				id={`exampleInput${type}`}
+				id={`exampleInput${name}`}
 				onChange={handleChange}
 				value={value}
 			/>
