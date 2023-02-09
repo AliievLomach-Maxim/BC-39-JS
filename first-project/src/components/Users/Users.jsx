@@ -1,34 +1,22 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
+
+import { useDispatch, useSelector } from 'react-redux'
 
 import CardUser from './CardUser'
 import CreateUserForm from './CreateUserForm'
 import Modal from '../UI Component/Modal'
 import FilterUsers from './FilterUsers'
-import { shallowEqual, useDispatch, useSelector } from 'react-redux'
-import { createUser, deleteUser } from '../../store/users/slices/usersSlice'
-import {
-	selectorUsersFilter,
-	selectorUsersList,
-	usersFilteredListSelector,
-} from '../../store/selectors/usersSelectors/selectors'
 
-// const selector = (state) => {
-// 	const { counter, news } = state
-// 	return { counter, news }
-// }
+import { createUser, deleteUser } from '../../store/users/slices/usersSlice'
+import { usersFilteredListSelector } from '../../store/selectors/usersSelectors/selectors'
 
 const Users = () => {
-	const dispatch = useDispatch()
 	const [visibleCreate, setVisibleCreate] = useState(false)
 	const [counter, setCounter] = useState(0)
 
-	const filteredUsers = useSelector(usersFilteredListSelector)
+	const dispatch = useDispatch()
 
-	// const filteredUsers = () =>
-	// 	usersList.filter((user) => {
-	// 		console.log('filter')
-	// 		return user.firstName.toLowerCase().includes(filterText.toLowerCase())
-	// 	})
+	const filteredUsers = useSelector(usersFilteredListSelector)
 
 	const toggleModalCreate = () => {
 		setVisibleCreate((prev) => !prev)

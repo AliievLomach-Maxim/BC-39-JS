@@ -4,6 +4,7 @@ import { filterTextAction } from '../../store/users/slices/usersSlice'
 
 const FilterUsers = () => {
 	const dispatch = useDispatch()
+	
 	const handleChange = ({ target: { value } }) => {
 		dispatch(filterTextAction(value))
 	}

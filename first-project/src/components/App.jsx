@@ -1,4 +1,4 @@
-import { lazy,  } from 'react'
+import { lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 
@@ -16,7 +16,6 @@ const NewsPage = lazy(() => import('../pages/NewsPage'))
 const UsersPage = lazy(() => import('../pages/UsersPage'))
 
 const App = () => {
-
 	return (
 		<>
 			<Toaster position='top-right' toastOptions={{ duration: 1500 }} />

@@ -1,8 +1,11 @@
 import { useState } from 'react'
 
 import { Link, useNavigate } from 'react-router-dom'
-import { signInUser } from '../../../services/auth-services/auth-service'
+
 import { toast } from 'react-hot-toast'
+
+import { signInUser } from '../../../services/auth-services/auth-service'
+import InputForForm from '../InputForForm'
 
 const SignInForm = () => {
 	const [userName, setUserName] = useState('')
@@ -10,6 +13,7 @@ const SignInForm = () => {
 	const [password, setPassword] = useState('')
 
 	const navigate = useNavigate()
+
 	const handleChange = ({ target }) => {
 		const { name, value } = target
 		if (name === 'email') setEmail(value)
@@ -34,51 +38,29 @@ const SignInForm = () => {
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<div className='mb-3'>
-				<label htmlFor='exampleInputUserName' className='form-label'>
-					User Name
-				</label>
-				<input
-					name='userName'
-					type='text'
-					className='form-control'
-					id='exampleInputUserName'
-					onChange={handleChange}
-					value={userName}
-				/>
-			</div>
-			<div className='mb-3'>
-				<label htmlFor='exampleInputEmail1' className='form-label'>
-					Email address
-				</label>
-				<input
-					name='email'
-					type='text'
-					className='form-control'
-					id='exampleInputEmail1'
-					aria-describedby='emailHelp'
-					onChange={handleChange}
-					value={email}
-				/>
-			</div>
-			<div className='mb-3'>
-				<label htmlFor='exampleInputPassword1' className='form-label'>
-					Password
-				</label>
-				<input
-					name='password'
-					type='password'
-					className='form-control'
-					id='exampleInputPassword1'
-					onChange={handleChange}
-					value={password}
-				/>
-			</div>
-
+			<InputForForm
+				handleChange={handleChange}
+				value={userName}
+				label='User Name'
+				name='userName'
+			/>
+			<InputForForm
+				handleChange={handleChange}
+				value={email}
+				label='Email address'
+				name='email'
+			/>
+			<InputForForm
+				handleChange={handleChange}
+				value={password}
+				label='Password'
+				name='password'
+				type='password'
+			/>
 			<div className='mb-2'>
 				<Link to={'/login'}>Login</Link>
 			</div>
-			<button type='submit' className='btn btn-primary placeholder-glow'>
+			<button type='submit' className='btn btn-primary'>
 				Create User
 			</button>
 		</form>

@@ -242,3 +242,7 @@
 -   global instance axios
 -   setAuthToken
 -   get profile
+
+# Module 8 > Less 2
+
+-   unwrap()
