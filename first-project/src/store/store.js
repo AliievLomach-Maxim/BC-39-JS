@@ -15,11 +15,11 @@ import { newsApi } from './news/usersApi'
 
 import { rootReducer } from './reducer'
 
-const persistConfig = {
-	key: 'main',
-	storage,
-	blacklist: ['counter'],
-}
+// const persistConfig = {
+// 	key: 'main',
+// 	storage,
+// 	blacklist: ['counter'],
+// }
 
 // const customMiddleware = (store) => {
 // 	return (next) => {
@@ -34,15 +34,22 @@ const persistConfig = {
 // 	}
 // }
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+// const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
-	reducer: persistedReducer,
+	reducer: rootReducer,
 	// middleware: [customMiddleware],
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
 			serializableCheck: {
-				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+				ignoredActions: [
+					FLUSH,
+					REHYDRATE,
+					PAUSE,
+					PERSIST,
+					PURGE,
+					REGISTER,
+				],
 			},
 		}).concat(newsApi.middleware),
 	// middleware: (getDefaultMiddleware) =>

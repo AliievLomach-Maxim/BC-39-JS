@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { authReducer } from './auth/slice'
 
 import { counterReducer } from './counterWithSlice/slice'
 // import { newsReducer } from './news/slices/newsSlice'
@@ -12,4 +13,5 @@ export const rootReducer = combineReducers({
 	// news: newsReducer,
 	users: usersReducer,
 	[newsApi.reducerPath]: newsApi.reducer,
+	auth: authReducer,
 })
