@@ -19,10 +19,10 @@ const Header = () => {
 		dellTokenAuth()
 	}
 
-	useEffect(() => {
-		isAuth && setTokenAuth(`Bearer ${isAuth}`)
-		!profile.name && dispatch(profileThunk())
-	}, [dispatch, isAuth, profile.name])
+	// useEffect(() => {
+	// 	isAuth && setTokenAuth(`Bearer ${isAuth}`)
+	// 	!profile.name && dispatch(profileThunk())
+	// }, [dispatch, isAuth, profile.name])
 
 	return (
 		<nav className='navbar bg-dark navbar-expand-lg'>
@@ -59,7 +59,7 @@ const Header = () => {
 					</div>
 				</div>
 				{isAuth && (
-					<div className='text-white'>
+					<div className='text-white me-3'>
 						{profile.name} {profile.email}
 					</div>
 				)}

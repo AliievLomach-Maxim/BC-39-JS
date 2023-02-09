@@ -12,6 +12,5 @@ export const loginUser = async (body) => {
 
 export const getProfile = async () => {
 	const { data } = await axiosInstance('/auth/profile')
-	console.log(data)
 	return data
 }

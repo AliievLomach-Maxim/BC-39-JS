@@ -1,4 +1,4 @@
-import { lazy } from 'react'
+import { lazy, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 
@@ -12,10 +12,23 @@ import NewsDetails from './News/ContentInfo/NewsDetails'
 import UserDetails from './Users/UserDetails'
 import SignInPage from '../pages/SignInPage'
 
+import { useDispatch, useSelector } from 'react-redux'
+import { setTokenAuth } from '../api/api'
+import { profileThunk } from '../store/auth/thunk'
+
 const NewsPage = lazy(() => import('../pages/NewsPage'))
 const UsersPage = lazy(() => import('../pages/UsersPage'))
 
 const App = () => {
+	const profile = useSelector((state) => state.auth.profile)
+	const isAuth = useSelector((state) => state.auth.access_token)
+
+	const dispatch = useDispatch()
+	useEffect(() => {
+		isAuth && setTokenAuth(`Bearer ${isAuth}`)
+		isAuth && dispatch(profileThunk())
+	}, [dispatch, isAuth, profile.name])
+
 	return (
 		<>
 			<Toaster position='top-right' toastOptions={{ duration: 1500 }} />
