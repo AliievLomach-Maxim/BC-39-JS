@@ -1,4 +1,4 @@
-import { lazy } from 'react'
+import { lazy,  } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 
@@ -10,30 +10,21 @@ import PrivateRoute from './PrivateRoute/PrivateRoute'
 import NewsDetails from './News/ContentInfo/NewsDetails'
 
 import UserDetails from './Users/UserDetails'
+import SignInPage from '../pages/SignInPage'
 
 const NewsPage = lazy(() => import('../pages/NewsPage'))
 const UsersPage = lazy(() => import('../pages/UsersPage'))
 
 const App = () => {
+
 	return (
 		<>
-			<Toaster
-				position='top-right'
-				toastOptions={{ duration: 1500 }}
-			/>
+			<Toaster position='top-right' toastOptions={{ duration: 1500 }} />
 			<Routes>
-				<Route
-					path='/login'
-					element={<LoginPage />}
-				/>
-				<Route
-					path='/'
-					element={<Layout />}
-				>
-					<Route
-						index
-						element={<HomePage />}
-					/>
+				<Route path='/login' element={<LoginPage />} />
+				<Route path='/signIn' element={<SignInPage />} />
+				<Route path='/' element={<Layout />}>
+					<Route index element={<HomePage />} />
 					<Route
 						path='news'
 						element={
@@ -67,10 +58,7 @@ const App = () => {
 						}
 					/>
 				</Route>
-				<Route
-					path='*'
-					element={<ErrorPage />}
-				/>
+				<Route path='*' element={<ErrorPage />} />
 			</Routes>
 		</>
 	)

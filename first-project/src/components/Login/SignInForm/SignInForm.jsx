@@ -1,42 +1,52 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { Link, useNavigate } from 'react-router-dom'
-import {
-	getProfile,
-	loginUser,
-} from '../../../services/auth-services/auth-service'
-import { authThunk, profileThunk } from '../../../store/auth/thunk'
-import { useDispatch, useSelector } from 'react-redux'
+import { signInUser } from '../../../services/auth-services/auth-service'
+import { toast } from 'react-hot-toast'
 
-const LoginForm = () => {
+const SignInForm = () => {
+	const [userName, setUserName] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
 	const navigate = useNavigate()
-	const dispatch = useDispatch()
-
-	const { isLoading } = useSelector((state) => state.auth)
-	const isAuth = useSelector((state) => state.auth.access_token)
-
-	useEffect(() => {
-		isAuth && dispatch(profileThunk())
-		isAuth && navigate('/')
-	}, [dispatch, isAuth, navigate])
-
 	const handleChange = ({ target }) => {
 		const { name, value } = target
 		if (name === 'email') setEmail(value)
+		else if (name === 'userName') setUserName(value)
 		else setPassword(value)
 	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		dispatch(authThunk({ email, password }))
-		// loginUser({ email, password }).then(console.log)
+		signInUser({
+			name: userName,
+			email,
+			password,
+			avatar: 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png',
+		})
+			.then(() => {
+				toast.success('Create user successfully')
+				navigate('/login')
+			})
+			.catch((error) => toast.error(error.response.data.message))
 	}
 
 	return (
 		<form onSubmit={handleSubmit}>
+			<div className='mb-3'>
+				<label htmlFor='exampleInputUserName' className='form-label'>
+					User Name
+				</label>
+				<input
+					name='userName'
+					type='text'
+					className='form-control'
+					id='exampleInputUserName'
+					onChange={handleChange}
+					value={userName}
+				/>
+			</div>
 			<div className='mb-3'>
 				<label htmlFor='exampleInputEmail1' className='form-label'>
 					Email address
@@ -50,9 +60,6 @@ const LoginForm = () => {
 					onChange={handleChange}
 					value={email}
 				/>
-				<div id='emailHelp' className='form-text'>
-					We'll never share your email with anyone else.
-				</div>
 			</div>
 			<div className='mb-3'>
 				<label htmlFor='exampleInputPassword1' className='form-label'>
@@ -67,18 +74,15 @@ const LoginForm = () => {
 					value={password}
 				/>
 			</div>
+
 			<div className='mb-2'>
-				<Link to={'/signIn'}>SignIn</Link>
+				<Link to={'/login'}>Login</Link>
 			</div>
-			<button
-				disabled={isLoading}
-				type='submit'
-				className='btn btn-primary'
-			>
-				Submit
+			<button type='submit' className='btn btn-primary placeholder-glow'>
+				Create User
 			</button>
 		</form>
 	)
 }
 
-export default LoginForm
+export default SignInForm

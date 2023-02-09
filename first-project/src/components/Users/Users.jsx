@@ -10,7 +10,7 @@ import {
 	selectorUsersFilter,
 	selectorUsersList,
 	usersFilteredListSelector,
-} from '../../store/selectors/selectors'
+} from '../../store/selectors/usersSelectors/selectors'
 
 // const selector = (state) => {
 // 	const { counter, news } = state
@@ -40,7 +40,9 @@ const Users = () => {
 
 	return (
 		<>
-			<button onClick={() => setCounter((prev) => prev + 1)}>{counter}</button>
+			<button onClick={() => setCounter((prev) => prev + 1)}>
+				{counter}
+			</button>
 			<FilterUsers />
 			<div className='container-fluid'>
 				<div className='row'>
@@ -52,18 +54,12 @@ const Users = () => {
 					</button>
 
 					{filteredUsers.length === 0 && (
-						<div
-							className='alert alert-warning  '
-							role='alert'
-						>
+						<div className='alert alert-warning  ' role='alert'>
 							User not found!
 						</div>
 					)}
 					{visibleCreate && (
-						<Modal
-							onClose={toggleModalCreate}
-							type='Create'
-						>
+						<Modal onClose={toggleModalCreate} type='Create'>
 							<CreateUserForm
 								create={(value) => dispatch(createUser(value))}
 								onClose={toggleModalCreate}

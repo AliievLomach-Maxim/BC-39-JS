@@ -1,10 +1,29 @@
-import React from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { useCustomContext } from '../../Context/CustomContext'
+
+import { dellTokenAuth, setTokenAuth } from '../../api/api'
+import { logOutAction } from '../../store/auth/slice'
+import { profileThunk } from '../../store/auth/thunk'
 
 const Header = () => {
-	const { isAuth, logout } = useCustomContext()
 	const navigate = useNavigate()
+
+	const dispatch = useDispatch()
+
+	const profile = useSelector((state) => state.auth.profile)
+	const isAuth = useSelector((state) => state.auth.access_token)
+
+	const handleLogOut = () => {
+		dispatch(logOutAction())
+		dellTokenAuth()
+	}
+
+	useEffect(() => {
+		setTokenAuth(`Bearer ${isAuth}`)
+		!profile.name && dispatch(profileThunk())
+	}, [dispatch, isAuth, profile.name])
+
 	return (
 		<nav className='navbar bg-dark navbar-expand-lg'>
 			<div className='container-fluid'>
@@ -21,24 +40,33 @@ const Header = () => {
 						>
 							Home
 						</Link>
-						<Link
-							className='nav-link text-white'
-							to='/news'
-						>
-							News
-						</Link>
-						<Link
-							className='nav-link text-white'
-							to='/users'
-						>
-							Users
-						</Link>
+						{isAuth && (
+							<>
+								<Link
+									className='nav-link text-white'
+									to='/news'
+								>
+									News
+								</Link>
+								<Link
+									className='nav-link text-white'
+									to='/users'
+								>
+									Users
+								</Link>
+							</>
+						)}
 					</div>
 				</div>
+				{isAuth && (
+					<div className='text-white'>
+						{profile.name} {profile.email}
+					</div>
+				)}
 				<div
 					className='btn btn-outline-success'
 					onClick={() => {
-						isAuth ? logout() : navigate('/login')
+						isAuth ? handleLogOut() : navigate('/login')
 					}}
 				>
 					{isAuth ? 'Logout' : 'Login'}
