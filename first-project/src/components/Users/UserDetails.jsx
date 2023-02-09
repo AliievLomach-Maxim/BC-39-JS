@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+
 import { Link, useLocation, useParams } from 'react-router-dom'
 
 import CardUser from './CardUser/CardUser'
@@ -8,6 +9,7 @@ const UserDetails = () => {
 	const { usersList } = useSelector((state) => state.users)
 
 	const location = useLocation()
+
 	const params = useParams()
 	const { id } = params
 

@@ -20,7 +20,7 @@ const Header = () => {
 	}
 
 	useEffect(() => {
-		setTokenAuth(`Bearer ${isAuth}`)
+		isAuth && setTokenAuth(`Bearer ${isAuth}`)
 		!profile.name && dispatch(profileThunk())
 	}, [dispatch, isAuth, profile.name])
 
