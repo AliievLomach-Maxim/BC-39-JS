@@ -9,6 +9,9 @@ import FilterUsers from './FilterUsers'
 
 import { createUser, deleteUser } from '../../store/users/slices/usersSlice'
 import { usersFilteredListSelector } from '../../store/selectors/usersSelectors/selectors'
+import { CSSTransition } from 'react-transition-group'
+
+import './style.css'
 
 const Users = () => {
 	const [visibleCreate, setVisibleCreate] = useState(false)
@@ -40,20 +43,35 @@ const Users = () => {
 					>
 						Create User
 					</button>
-
 					{filteredUsers.length === 0 && (
 						<div className='alert alert-warning  ' role='alert'>
 							User not found!
 						</div>
 					)}
-					{visibleCreate && (
+					{/* {visibleCreate && (
 						<Modal onClose={toggleModalCreate} type='Create'>
 							<CreateUserForm
 								create={(value) => dispatch(createUser(value))}
 								onClose={toggleModalCreate}
 							/>
 						</Modal>
-					)}
+					)} */}
+					<CSSTransition
+						unmountOnExit
+						in={visibleCreate}
+						timeout={500}
+					>
+						<div className='custom-modal'>
+							<Modal onClose={toggleModalCreate} type='Create'>
+								<CreateUserForm
+									create={(value) =>
+										dispatch(createUser(value))
+									}
+									onClose={toggleModalCreate}
+								/>
+							</Modal>
+						</div>
+					</CSSTransition>
 					{filteredUsers.length > 0 &&
 						filteredUsers.map(
 							({ firstName, secondName, address, phone, id }) => (

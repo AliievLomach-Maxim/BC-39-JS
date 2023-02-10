@@ -4,10 +4,15 @@ import {
 	loginUser,
 } from '../../services/auth-services/auth-service'
 
-export const authThunk = createAsyncThunk('auth/login', (payload) => {
-	return loginUser(payload)
-})
+export const authThunk = createAsyncThunk(
+	'auth/login',
+	async (payload, { dispatch }) => {
+		const data = await loginUser(payload)
+		dispatch(profileThunk())
+		return data
+	}
+)
 
-export const profileThunk = createAsyncThunk('auth/profile',  () => {
+export const profileThunk = createAsyncThunk('auth/profile', () => {
 	return getProfile()
 })
