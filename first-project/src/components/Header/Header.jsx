@@ -1,10 +1,8 @@
-import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { dellTokenAuth, setTokenAuth } from '../../api/api'
+import { dellTokenAuth } from '../../api/api'
 import { logOutAction } from '../../store/auth/slice'
-import { profileThunk } from '../../store/auth/thunk'
 
 const Header = () => {
 	const navigate = useNavigate()
@@ -18,11 +16,6 @@ const Header = () => {
 		dispatch(logOutAction())
 		dellTokenAuth()
 	}
-
-	// useEffect(() => {
-	// 	isAuth && setTokenAuth(`Bearer ${isAuth}`)
-	// 	!profile.name && dispatch(profileThunk())
-	// }, [dispatch, isAuth, profile.name])
 
 	return (
 		<nav className='navbar bg-dark navbar-expand-lg'>

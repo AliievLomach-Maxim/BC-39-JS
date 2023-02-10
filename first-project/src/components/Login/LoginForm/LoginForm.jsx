@@ -1,26 +1,21 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { authThunk, profileThunk } from '../../../store/auth/thunk'
+import { toast } from 'react-hot-toast'
+
+import { authThunk } from '../../../store/auth/thunk'
 import InputForForm from '../InputForForm'
 
 const LoginForm = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
-	const navigate = useNavigate()
 	const dispatch = useDispatch()
 
 	const { isLoading } = useSelector((state) => state.auth)
-	const isAuth = useSelector((state) => state.auth.access_token)
-
-	useEffect(() => {
-		isAuth && dispatch(profileThunk())
-		isAuth && navigate('/')
-	}, [dispatch, isAuth, navigate])
 
 	const handleChange = ({ target }) => {
 		const { name, value } = target
@@ -31,6 +26,8 @@ const LoginForm = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault()
 		dispatch(authThunk({ email, password }))
+			.unwrap()
+			.catch(() => toast.error('Oops... some error'))
 	}
 
 	return (

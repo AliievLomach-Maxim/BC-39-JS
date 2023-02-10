@@ -1,10 +1,14 @@
 import { useState } from 'react'
 
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+
+import { useDispatch } from 'react-redux'
 
 import { toast } from 'react-hot-toast'
 
 import { signInUser } from '../../../services/auth-services/auth-service'
+import { authThunk } from '../../../store/auth/thunk'
+
 import InputForForm from '../InputForForm'
 
 const SignInForm = () => {
@@ -12,7 +16,7 @@ const SignInForm = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
-	const navigate = useNavigate()
+	const dispatch = useDispatch()
 
 	const handleChange = ({ target }) => {
 		const { name, value } = target
@@ -31,7 +35,9 @@ const SignInForm = () => {
 		})
 			.then(() => {
 				toast.success('Create user successfully')
-				navigate('/login')
+				dispatch(authThunk({ email, password }))
+					.unwrap()
+					.catch(() => toast.error('Oops... some error'))
 			})
 			.catch((error) => toast.error(error.response.data.message))
 	}

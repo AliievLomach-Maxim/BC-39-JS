@@ -1,0 +1,13 @@
+.custom-modal.enter {
+	opacity: 0;
+}
+
+.custom-modal.enter-done {
+	opacity: 1;
+	transition: 0.5s ease-in-out;
+}
+
+.custom-modal.exit-active {
+	opacity: 0;
+	transition: 0.5s ease-in-out;
+}
